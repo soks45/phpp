@@ -1,8 +1,13 @@
 {
-    "name": "soks/phpp",
+    "name": "admin/web-tools",
     "autoload": {
         "psr-4": {
-            "Framework\\": "Framework"
-        }
-    }
+            "Framework\\": "Framework",
+            "App\\": "App"
+        },
+        "files": [
+            "App/routes.php"
+        ]
+    },
+    "require": {}
 }
