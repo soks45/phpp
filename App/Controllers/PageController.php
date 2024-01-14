@@ -2,21 +2,12 @@
     namespace App\Controllers;
 
     use Framework\Controller;
+    use Framework\Request;
 
     class PageController extends Controller
     {
-        public function page(array $arr)
+        public function index(Request $request)
         {
-            return $this->view('page.php', ['arr' => $arr]);
-        }
-
-        public function create(array $arr)
-        {
-            return $this->view('create.php', ['arr' => $arr]);
-        }
-
-        public function update(array $arr)
-        {
-            return $this->view('update.php', ['arr' => $arr]);
+            return $this->view('home.php', ['user' =>  $request->getUser(), 'message' => $request->getMessage()]);
         }
     }

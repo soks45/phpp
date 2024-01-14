@@ -12,7 +12,7 @@
 
         public function getById($id)
         {
-            return $this->getWhere([$this->getIdField()=>$id]);
+            return $this->getWhere([$this->getIdField()=>$id])[0];
         }
 
         public function getWhere($conditions)
@@ -20,8 +20,9 @@
             $condition = implode(" AND ", array_map(function($key,$value){return "$key = :$key";},  array_keys($conditions), $conditions));
             $query = $this->connection->prepare("SELECT * FROM $this->table WHERE $condition");
 
-            foreach ($conditions as $condition => $value){
-                $query->bindParam(":$condition", $value[0]);
+            foreach ($conditions as $condition => $value)
+            {
+                $query->bindParam(":$condition", $value);
             }
             $query->execute();
 
