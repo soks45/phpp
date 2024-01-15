@@ -9,5 +9,8 @@
             "App/routes.php"
         ]
     },
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*"
+    }
 }
