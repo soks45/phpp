@@ -9,12 +9,14 @@
         private $path;
         private $action;
         private $type;
+        private bool $requireAuth;
 
-        public function __construct($path, $action, $type)
+        public function __construct($path, $action, $type, bool $auth = false)
         {
             $this->path = $path;
             $this->action = $action;
             $this->type = $type;
+            $this->requireAuth = $auth;
         }
 
         public function getMask()
@@ -22,6 +24,17 @@
             $path = $this->path;
             $path =  preg_replace("/{[a-z]\w*}/","(\w*)",$path);
             return '~'.$path.'~';
+        }
+
+        public function getPath()
+        {
+            return $this->path;
+        }
+
+
+        public function getAction()
+        {
+            return $this->action;
         }
 
         public function getControllerClass(): string
@@ -39,8 +52,13 @@
             return $this->type;
         }
 
-        public function getPath()
+        public function isRequireAuth(): bool
         {
-            return $this->path;
+            return $this->requireAuth;
+        }
+
+        public function setRequireAuth(bool $requireAuth): void
+        {
+            $this->requireAuth = $requireAuth;
         }
     }

@@ -2,6 +2,7 @@
     use Dotenv\Dotenv;
     use Framework\Container;
     use Framework\DbConnection;
+    use Framework\Exceptions\EnvLoadException;
 
     define('PATH_TO_MODELS',$_SERVER['DOCUMENT_ROOT'].'/framework/');
 
@@ -12,16 +13,26 @@
         require_once dirname(__FILE__) . '/vendor/autoload.php';
     }
 
-    if (file_exists(".env"))
-    {
-        $dotenv = Dotenv::createImmutable(__DIR__);
-        $dotenv->load();
-        echo "Окружение загружено<p>";
-    }
-    else {
-        echo "Ошибка хагрузки ENV<br>";
-    }
+    try {
+        if (file_exists(".env"))
+        {
+            $dotenv = Dotenv::createImmutable(__DIR__);
+            $dotenv->load();
+        }
+        else
+        {
+            throw new EnvLoadException();
+        }
 
-    Container::getApp()->run();
+        session_start(["use_strict_mode" => true]);
+
+        Container::getApp()->run();
+    }
+    catch (Exception $e){
+        $_SESSION['msg'] = $e->getMessage();
+        header('Location: /home');
+
+        exit();
+    }
 
     die();
