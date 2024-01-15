@@ -1,20 +1,20 @@
 <?php
-namespace Framework;
+    namespace Framework;
 
-class Container
-{
-    public static function getApp(): Application
+    class Container
     {
-        return new Application(self::getRouter());
-    }
+        public static function getApp(): Application
+        {
+            return new Application(self::getRouter());
+        }
 
-    public static function getRouter(): Router
-    {
-        return new Router(self::getRequest());
-    }
+        public static function getRouter(): Router
+        {
+            return new Router(self::getRequest());
+        }
 
-    public static function getRequest(): Request
-    {
-        return new Request();
+        public static function getRequest(): Request
+        {
+            return new Request();
+        }
     }
-}
