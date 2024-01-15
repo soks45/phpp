@@ -1,0 +1,8 @@
+{
+    "name": "soks/phpp",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework"
+        }
+    }
+}
